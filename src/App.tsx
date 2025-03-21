@@ -19,28 +19,28 @@ export class App extends React.Component<State> {
     clockName: 'Clock-0',
   };
 
-  handleClockNotVisible = (event: MouseEvent) => {
+  handleRightMouseClick = (event: MouseEvent) => {
     event.preventDefault();
     this.setState({ hasClock: false });
   };
 
-  handleClockVisible = () => {
+  handleLeftMouseClick = () => {
     this.setState({ hasClock: true });
   };
 
   timerId = 0;
 
   componentDidMount(): void {
-    document.addEventListener('contextmenu', this.handleClockNotVisible);
-    document.addEventListener('click', this.handleClockVisible);
+    document.addEventListener('contextmenu', this.handleRightMouseClick);
+    document.addEventListener('click', this.handleLeftMouseClick);
     this.timerId = window.setInterval(() => {
       this.setState({ clockName: getRandomName() });
     }, 3300);
   }
 
   componentWillUnmount(): void {
-    document.removeEventListener('contextmenu', this.handleClockNotVisible);
-    document.removeEventListener('click', this.handleClockVisible);
+    document.removeEventListener('contextmenu', this.handleRightMouseClick);
+    document.removeEventListener('click', this.handleLeftMouseClick);
     window.clearInterval(this.timerId);
   }
 
